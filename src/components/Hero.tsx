@@ -3,14 +3,19 @@ import React from 'react';
 export const Hero: React.FC = () => {
     return (
         <section id="inicio" className="text-center mb-32 scroll-mt-32">
-            <div className="relative inline-block mb-8">
-                <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 to-pink-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
-                <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full border-2 border-purple-500/30 p-0 overflow-hidden shadow-2xl flex items-center justify-center">
-                    <img
-                        src="/profile.png"
-                        alt="Profile"
-                        className="w-full h-full object-cover object-[center_30%] rounded-full scale-[1.15]"
-                    />
+            <div className="relative inline-block mb-8 group animate-float">
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 via-blue-500 to-cyan-400 rounded-full blur-xl opacity-30 md:group-hover:opacity-50 transition-opacity duration-300"></div>
+                <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full p-[2px] bg-gradient-to-tr from-purple-500/40 via-blue-500/40 to-cyan-400/40 shadow-2xl transition-transform duration-300 md:group-hover:scale-105">
+                    <div className="w-full h-full rounded-full overflow-hidden bg-[#0a0a0a]">
+                        <img
+                            src="/profile1.webp"
+                            alt="Profile"
+                            loading="eager"
+                            decoding="async"
+                            fetchPriority="high"
+                            className="w-full h-full object-cover object-[center_30%] rounded-full scale-[1.15]"
+                        />
+                    </div>
                 </div>
             </div>
 
