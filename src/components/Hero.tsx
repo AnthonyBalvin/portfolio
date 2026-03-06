@@ -1,6 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+const PHRASES = [
+    "Aplicaciones Web Profesionales",
+    "Plataformas Digitales",
+    "Sistemas Escalables para Negocios"
+];
 
 export const Hero: React.FC = () => {
+    const [text, setText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [loopNum, setLoopNum] = useState(0);
+
+    useEffect(() => {
+        let timeout: ReturnType<typeof setTimeout>;
+        const i = loopNum % PHRASES.length;
+        const fullText = PHRASES[i];
+
+        if (isDeleting) {
+            timeout = setTimeout(() => {
+                setText(fullText.substring(0, text.length - 1));
+            }, 40);
+        } else {
+            timeout = setTimeout(() => {
+                setText(fullText.substring(0, text.length + 1));
+            }, 80);
+        }
+
+        if (!isDeleting && text === fullText) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => setIsDeleting(true), 1500);
+        } else if (isDeleting && text === '') {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                setIsDeleting(false);
+                setLoopNum((prev) => prev + 1);
+            }, 300);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [text, isDeleting, loopNum]);
     return (
         <section id="inicio" className="text-center mb-32 scroll-mt-32">
             <div className="relative inline-block mb-8 group animate-float">
@@ -20,15 +58,15 @@ export const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight text-white">
-                Ingeniero en Sistemas e Informática
+                Desarrollador de Sistemas Web
             </h1>
 
-            <h2 className="text-xl md:text-2xl text-white/70 font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
-                Especializado en <br className="hidden sm:block" />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 font-bold">
-                    Automatizaciones, Sistemas Web y Páginas Web Profesionales
+            <div className="text-xl md:text-2xl text-white/80 font-medium mb-12 max-w-3xl mx-auto leading-relaxed flex flex-col items-center min-h-[80px] md:min-h-[96px]">
+                <span className="mb-2">Especializado en crear</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 font-bold block text-center min-h-[32px] md:min-h-[40px]">
+                    {text}<span className="text-cyan-400 animate-pulse ml-1 font-normal opacity-80">|</span>
                 </span>
-            </h2>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4 sm:px-0 max-w-sm sm:max-w-none mx-auto">
                 <a
